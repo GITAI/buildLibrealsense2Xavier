@@ -38,4 +38,8 @@ patch -p1 < ${INSTALL_DIR}/patches/realsense-hid-ubuntu-bionic-Xavier-4.9.140.pa
 echo -e "\e[32mpowerlinefrequency-control-fix patch\e[0m"
 patch -p1 < ${LIBREALSENSE_DIR}/scripts/realsense-powerlinefrequency-control-fix.patch
 
+# Apply PREEMPT RT patches
+echo -e "\e[32mPREEMPT RT patch\e[0m"
+./scripts/rt-patch.sh apply-patches
+mv .config default.config && ./scripts/kconfig/merge_config.sh -O . default.config ${INSTALL_DIR}/patches/preempt-rt.config
 
